@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -16,17 +18,19 @@ public class User {
     private String fullname;
     private String phone;
     private String address;
+    private String avatar;
     
     public User() {
     }
 
-    public User(long id, String email, String password, String fullname, String phone, String address) {
+    public User(long id, String email, String password, String fullname, String phone, String address, String avatar) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.fullname = fullname;
         this.phone = phone;
         this.address = address;
+        this.avatar = avatar;
     }
 
     public long getId() {
@@ -75,6 +79,14 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @Override
