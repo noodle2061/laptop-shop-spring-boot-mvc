@@ -1,4 +1,4 @@
-package com.javaweb.laptopshop.controller;
+package com.javaweb.laptopshop.controller.admin;
 
 import java.util.List;
 
@@ -25,17 +25,18 @@ public class UserController {
 
     @GetMapping("/")
     public String getHomePage(Model model) {
-        List<User> users = userService.findAllUsersByEmail("");
-        System.out.println(users);
-        model.addAttribute("eric", "test");
+        // List<User> users = userService.findAllUsersByEmail("");
+        // System.out.println(users);
+        // model.addAttribute("eric", "test");
         return "hello";
+        // return "admin/dashboard/hello";
     }
 
     @GetMapping("/admin/user") 
     public String adminPage(Model model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        return "admin/user/table_user";
+        return "admin/user/show";
     }
 
     @GetMapping("/admin/user/create")
@@ -57,7 +58,7 @@ public class UserController {
     public String getUserDetailPage(Model model, @PathVariable("id") Long id) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
-        return "admin/user/user-detail";
+        return "admin/user/detail";
     }
 
     @GetMapping("/admin/user/edit/{id}")

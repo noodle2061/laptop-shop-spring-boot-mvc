@@ -24,13 +24,7 @@ public class WebMvcConfig implements WebMvcConfigurer { // Class cấu hình Web
 
         // Thiết lập class View là JstlView để hỗ trợ JSTL trong JSP
         bean.setViewClass(JstlView.class);
-
-        // Thiết lập tiền tố (prefix) cho đường dẫn file view
-        // ViewResolver sẽ tìm view trong thư mục /WEB-INF/jsp/
         bean.setPrefix("/WEB-INF/view/");
-
-        // Thiết lập hậu tố (suffix) cho tên file view
-        // ViewResolver sẽ giả định file view có phần mở rộng là .jsp
         bean.setSuffix(".jsp");
 
         // Trả về Bean ViewResolver đã cấu hình
@@ -47,5 +41,6 @@ public class WebMvcConfig implements WebMvcConfigurer { // Class cấu hình Web
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
     }
 }

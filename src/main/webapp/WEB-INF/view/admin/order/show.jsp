@@ -19,25 +19,12 @@
             <div id="layoutSidenav">
                 <jsp:include page="../layout/sidebar.jsp" />
                 <div id="layoutSidenav_content">
-                    <div class="container mt-5 col-md-6 col-12 mx-auto">
-                        <h1 class="text-center">Delete user</h1>
-                        <hr>
-                        <div class="alert alert-danger">
-                            <p>Are you sure you want to delete this user?</p>
-                        </div>
-                        <div class="d-flex gap-2 mt-3">
-                            <a href="/admin/user" class="btn btn-success">Back</a>
-                            <form:form action="/admin/user/delete/${id}" method="post">
-                                <button class="btn btn-danger" type="submit">Submit</button>
-                            </form:form>
-                        </div>
-                        
-                    </div>
+                    
                     <jsp:include page="../layout/footer.jsp" />
                 </div>
             </div>
             <script src="/js/scripts.js"></script>
-
+ 
         </body>
 
         </html>

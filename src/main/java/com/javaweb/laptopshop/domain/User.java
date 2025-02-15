@@ -1,9 +1,11 @@
 package com.javaweb.laptopshop.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +21,9 @@ public class User {
     private String phone;
     private String address;
     private String avatar;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Role role; 
     
     public User() {
     }

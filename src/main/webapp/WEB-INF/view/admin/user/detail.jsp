@@ -19,19 +19,26 @@
             <div id="layoutSidenav">
                 <jsp:include page="../layout/sidebar.jsp" />
                 <div id="layoutSidenav_content">
-                    <div class="container mt-5 col-md-6 col-12 mx-auto">
-                        <h1 class="text-center">Delete user</h1>
+                    <div class="container mt-5">
+                        <h1 class="text-center">Detail of ${user.fullname}</h1>
                         <hr>
-                        <div class="alert alert-danger">
-                            <p>Are you sure you want to delete this user?</p>
+                        <div class = "card col-md-8 mx-auto">
+                            <div class = "card-header" style="font-weight: bolder; text-align: center; background-color: rgb(160, 206, 168);">${user.fullname}'s Information</div>
+                            <div class = "card-body text-center">
+                                <div class="" style="width: 100%;">
+                                    <div class="">
+                                        <p><strong>Id: </strong>${user.id}</p>
+                                        <p><strong>Fullname:</strong> ${user.fullname}</p>
+                                        <p><strong>Email:</strong> ${user.email}</p>
+                                        <p><strong>Phone:</strong> ${user.phone}</p>
+                                        <p><strong>Address:</strong> ${user.address}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="d-flex gap-2 mt-3">
-                            <a href="/admin/user" class="btn btn-success">Back</a>
-                            <form:form action="/admin/user/delete/${id}" method="post">
-                                <button class="btn btn-danger" type="submit">Submit</button>
-                            </form:form>
+                        <div class = "text-center mt-3">
+                            <a href="/admin/user" class = "btn btn-success">Back</a>
                         </div>
-                        
                     </div>
                     <jsp:include page="../layout/footer.jsp" />
                 </div>
