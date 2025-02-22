@@ -34,7 +34,7 @@
                                     <th>Fullname</th>
                                     <th>Phone</th>
                                     <th>Address</th>
-                                    <th>Action</th>
+                                    <th>Role</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,6 +45,7 @@
                                         <td>${user.fullname}</td>
                                         <td>${user.phone}</td>
                                         <td>${user.address}</td>
+                                        <td>${user.role.name}</td>
                                         <td>
                                             <a href="/admin/user/${user.id}" class="btn btn-success">View</a>
                                             <a href="/admin/user/edit/${user.id}" class="btn btn-warning">Edit</a>

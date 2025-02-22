@@ -94,9 +94,19 @@ public class User {
         this.avatar = avatar;
     }
 
+    
+
     @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullname=" + fullname
                 + ", phone=" + phone + ", address=" + address + "]";
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

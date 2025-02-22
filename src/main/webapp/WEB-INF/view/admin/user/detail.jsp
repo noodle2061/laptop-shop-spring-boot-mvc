@@ -27,6 +27,8 @@
                             <div class = "card-body text-center">
                                 <div class="" style="width: 100%;">
                                     <div class="">
+                                        <img src="/images/avatar/${user.avatar}" alt="${user.fullname}" style="width: 120px; height: 120px; border-radius: 50%;" class = "mb-3">
+                                        
                                         <p><strong>Id: </strong>${user.id}</p>
                                         <p><strong>Fullname:</strong> ${user.fullname}</p>
                                         <p><strong>Email:</strong> ${user.email}</p>

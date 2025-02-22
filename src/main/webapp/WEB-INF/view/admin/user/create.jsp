@@ -44,7 +44,7 @@
                                 <h1>Create User</h1>
                                 <hr>
                                 <form:form action="/admin/user/create" method="post" modelAttribute="newUser"
-                                    class="mt-5 row">
+                                    class="mt-5 row" enctype="multipart/form-data">
                                     <div class="mb-3 col-md-6 col-12">
                                         <form:label path="email" class="form-label">Email</form:label>
                                         <form:input type="text" class="form-control" path="email" />
@@ -67,11 +67,11 @@
                                     </div>
 
                                     <div class="mb-3 col-md-6 col-12">
-                                        <label path="role" class="form-label">Role</label>
-                                        <select path="role" class="form-select">
+                                        <form:label path="role.name" class="form-label">Role</form:label>
+                                        <form:select path="role.name" class="form-select">
                                             <option value="USER">User</option>
                                             <option value="ADMIN">Admin</option>
-                                        </select>
+                                        </form:select>
                                     </div>
 
                                     <div class="mb-3 col-md-6 col-12">
