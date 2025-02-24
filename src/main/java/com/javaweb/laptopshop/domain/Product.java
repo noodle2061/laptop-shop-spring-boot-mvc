@@ -45,6 +45,8 @@ public class Product {
         this.target = target;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }

@@ -21,7 +21,6 @@
 <div id="layoutSidenav">
     <jsp:include page="../layout/sidebar.jsp"/>
     <div id="layoutSidenav_content">
-        <h1>${product.image}</h1>
         <div class="mt-5 col-md-10 col-12 mx-auto">
             <div class="d-flex justify-content-between">
                 <h3>List Product</h3>
@@ -40,6 +39,7 @@
                     <th>Image</th>
                     <th>Factory</th>
                     <th>Target</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -54,7 +54,7 @@
                         </td>
                         <td>${product.factory}</td>
                         <td>${product.target}</td>
-                        <td>
+                        <td class="d-flex gap-2">
                             <a class="btn btn-primary" href="/admin/product/detail?id=${product.id}">View</a>
                             <a class="btn btn-warning" href="/admin/product/update?id=${product.id}">Edit</a>
                             <a class="btn btn-danger" href="/admin/product/delete?id=${product.id}">Delete</a>

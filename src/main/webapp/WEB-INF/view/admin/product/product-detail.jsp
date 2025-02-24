@@ -22,6 +22,8 @@
     <jsp:include page="../layout/sidebar.jsp"/>
     <div id="layoutSidenav_content">
         <main>
+        <h1>${product.image}</h1>
+
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Products</h1>
                 <ol class="breadcrumb mb-4">

@@ -13,10 +13,10 @@ import com.javaweb.laptopshop.service.UploadFileService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    @Autowired 
+    @Autowired
     private ProductRepository productRepository;
 
-    @Autowired 
+    @Autowired
     private UploadFileService uploadFileService;
 
     @Override
@@ -47,9 +47,29 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void update(Product product) {
-        productRepository.save(product);
+    public void update(Product product, MultipartFile imageFile) {
+        Product oldProduct = productRepository.getById(product.getId());
+        try {
+            if (imageFile != null && !imageFile.isEmpty()) {
+                String oldImageName = oldProduct.getImage();
+                if (!oldImageName.equals("default-product.png")) {
+                    uploadFileService.updateImage(imageFile, oldImageName, "product");
+                } else {
+                    oldProduct.setImage(uploadFileService.saveImage(imageFile, "product"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        oldProduct.setName(product.getName());
+        oldProduct.setPrice(product.getPrice());
+        oldProduct.setSold(product.getSold());
+        oldProduct.setQuantity(product.getQuantity());
+        oldProduct.setDetailDesc(product.getDetailDesc());
+        oldProduct.setShortDesc(product.getShortDesc());
+        oldProduct.setFactory(product.getFactory());
+        oldProduct.setTarget(product.getTarget());
+
+        productRepository.save(oldProduct);
     }
-
-
 }

@@ -12,5 +12,5 @@ public interface ProductService {
     public Product save(Product product, MultipartFile imageFile);
     public Product getById(long id);
     public void delete(long id);
-    public void update(Product product);
+    public void update(Product product, MultipartFile imageFile);
 }
