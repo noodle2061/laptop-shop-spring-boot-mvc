@@ -1,5 +1,8 @@
 package com.javaweb.laptopshop.domain;
 
+
+import com.javaweb.laptopshop.validator.StrongPassword;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -7,22 +10,37 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
 public class User {
 
+    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    @Email(message = "Email không đúng định dạng!!", regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
     private String email;
+
+    @NotNull
+    @Size(min = 6, message = "Mật khẩu phải có ít nhất 6 ký tự.")
+    @StrongPassword(message = "Mật khẩu phải chứa ít nhất 8 ký tự, 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt.")
     private String password;
+
+    @NotNull
+    @Size(min = 3, message = "Cần có ít nhất 3 ký tự.")
     private String fullname;
     private String phone;
     private String address;
     private String avatar;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Role role; 
     
     public User() {
@@ -99,7 +117,7 @@ public class User {
     @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullname=" + fullname
-                + ", phone=" + phone + ", address=" + address + "]";
+                + ", phone=" + phone + ", address=" + address + ", role="+ ((role==null) ? "null" :role.getName())+ ", avatar="+avatar+ "]";
     }
 
     public Role getRole() {

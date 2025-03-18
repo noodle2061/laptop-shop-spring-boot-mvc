@@ -2,38 +2,90 @@ package com.javaweb.laptopshop.domain;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "products")
 public class Product {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    // Đảm bảo tên sản phẩm không bị null hoặc rỗng
+    @NotBlank(message = "Product name is required")
+    @Column(name = "name")
     private String name;
+
+    // Giá sản phẩm phải lớn hơn 0
+    @DecimalMin(value = "0.0", inclusive = false, message = "Product price must be greater than 0")
+    @Column(name = "price")
     private double price;
+
+    @Column(name = "image")
     private String image;
+
+    // Mô tả chi tiết, sử dụng MEDIUMTEXT
+    @Column(name = "detail_desc", columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
+
+    @Column(name = "short_desc")
     private String shortDesc;
+
+    // Số lượng không âm
+    @Min(value = 0, message = "Quantity must not be negative")
+    @Column(name = "quantity")
     private long quantity;
+
+    // Số lượng bán ra không âm
+    @Min(value = 0, message = "Sold quantity must not be negative")
+    @Column(name = "sold")
     private long sold;
+
+    // Nhà sản xuất không được để trống
+    @NotBlank(message = "Factory is required")
+    @Column(name = "factory")
     private String factory;
+
+    // Đối tượng khách hàng không được để trống
+    @NotBlank(message = "Target audience is required")
+    @Column(name = "target")
     private String target;
 
-    @OneToMany(mappedBy = "product")
-    List<OrderDetail> orderDetail;
+    // Thêm lại trường Category
+    @Column(name = "category")
+    private String category;
 
+    // Nếu bạn có OrderDetail, liên kết OneToMany
+    @OneToMany(mappedBy = "product")
+    private List<OrderDetail> orderDetail;
+
+    // Constructor mặc định
     public Product() {
     }
 
-    public Product(long id, String name, double price, String image, String detailDesc, String shortDesc, long quantity, long sold, String factory, String target) {
-        this.id = id;
+    // Constructor đầy đủ (không kèm id vì id tự tăng)
+    public Product(
+            String name,
+            double price,
+            String image,
+            String detailDesc,
+            String shortDesc,
+            long quantity,
+            long sold,
+            String factory,
+            String target,
+            String category
+    ) {
         this.name = name;
         this.price = price;
         this.image = image;
@@ -43,10 +95,10 @@ public class Product {
         this.sold = sold;
         this.factory = factory;
         this.target = target;
+        this.category = category;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // Getter/Setter
     public long getId() {
         return id;
     }
@@ -127,5 +179,19 @@ public class Product {
         this.target = target;
     }
 
-    
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public List<OrderDetail> getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(List<OrderDetail> orderDetail) {
+        this.orderDetail = orderDetail;
+    }
 }

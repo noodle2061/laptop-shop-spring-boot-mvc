@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +16,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.javaweb.laptopshop.domain.User;
 import com.javaweb.laptopshop.service.UserService;
 
+import jakarta.validation.Valid;
+
 @Controller
 public class UserController {
 
-    @Autowired UserService userService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("/admin/user")
     public String adminPage(Model model) {
@@ -34,15 +38,17 @@ public class UserController {
         return "admin/user/create";
     }
 
-    @PostMapping("/admin/user/create")//
-    public String createUser(@ModelAttribute("newUser") User user,
+    @PostMapping("/admin/user/create") //
+    public String createUser(@ModelAttribute("newUser") @Valid User user,
+            BindingResult userBindingResult,
             @RequestParam("avatarFile") MultipartFile avatarFile) {
-
+        if (userBindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
         // Lưu thông tin user (bao gồm tên file avatar) vào DB
         userService.handleSaveUser(user, avatarFile);
         return "redirect:/admin/user";
     }
-
 
     @GetMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable("id") Long id) {
@@ -59,9 +65,9 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/edit/{id}")
-    public String updateUser(Model model, @ModelAttribute("user") User user, @PathVariable("id") Long id) {
-        // TODO: process POST request
-        System.out.println(user);
+    public String updateUser(Model model, 
+    @ModelAttribute("user") @Valid User user, 
+    @PathVariable("id") Long id) {
         User userUpdate = userService.getUserById(id);
         userUpdate.setFullname(user.getFullname());
         userUpdate.setPhone(user.getPhone());

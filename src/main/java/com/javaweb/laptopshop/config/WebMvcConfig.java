@@ -10,24 +10,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-@Configuration // Đánh dấu đây là class cấu hình Spring
-@EnableWebMvc // Kích hoạt cấu hình Spring MVC mặc định
-public class WebMvcConfig implements WebMvcConfigurer { // Class cấu hình WebMvc và implements interface
-                                                        // WebMvcConfigurer để tùy chỉnh
+@Configuration
+@EnableWebMvc 
+public class WebMvcConfig implements WebMvcConfigurer { 
+    
 
     @Bean // Đánh dấu method này tạo ra một Bean quản lý bởi Spring Container
     public ViewResolver viewResolver() { // Định nghĩa Bean ViewResolver
 
-        // Khởi tạo InternalResourceViewResolver - một implementation phổ biến của
-        // ViewResolver
         final InternalResourceViewResolver bean = new InternalResourceViewResolver();
-
-        // Thiết lập class View là JstlView để hỗ trợ JSTL trong JSP
         bean.setViewClass(JstlView.class);
         bean.setPrefix("/WEB-INF/view/");
         bean.setSuffix(".jsp");
 
-        // Trả về Bean ViewResolver đã cấu hình
         return bean;
     }
 

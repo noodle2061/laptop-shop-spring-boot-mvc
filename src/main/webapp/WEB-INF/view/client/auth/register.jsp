@@ -11,7 +11,7 @@
                 <meta name="description" content="" />
                 <meta name="author" content="" />
                 <title>Register - Laptopshop</title>
-                <link href="/css/styles.css" rel="stylesheet" />
+                <link href="/css/style.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
 
@@ -21,85 +21,59 @@
                         <main>
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-6">
                                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                                             <div class="card-header">
                                                 <h3 class="text-center font-weight-light my-4">Create Account</h3>
                                             </div>
                                             <div class="card-body">
                                                 <form:form method="post" action="/register"
-                                                    modelAttribute="registerUser">
-                                                    <c:set var="errorPassword">
-                                                        <form:errors path="confirmPassword"
-                                                            cssClass="invalid-feedback" />
-                                                    </c:set>
-                                                    <c:set var="errorEmail">
-                                                        <form:errors path="email" cssClass="invalid-feedback" />
-                                                    </c:set>
+                                                    modelAttribute="registerUser" class="row">
+                                                    <div class="col-md-6 col-12 mx-auto">
+                                                        <form:label class="form-label" path="firstName">First Name</form:label>
+                                                        <form:input path="firstName" type="text" class="form-control" cssErrorClass="form-control is-invalid" />
+                                                        <form:errors class="invalid-feedback" path="firstName"/>
+                                                    </div>
 
-                                                    <c:set var="errorFirstName">
-                                                        <form:errors path="firstName" cssClass="invalid-feedback" />
-                                                    </c:set>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input
-                                                                    class="form-control ${not empty errorFirstName ? 'is-invalid' : ''}"
-                                                                    type="text" placeholder="Enter your first name"
-                                                                    path="firstName" />
-                                                                <label for="inputFirstName">First name</label>
-                                                                ${errorFirstName}
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating">
-                                                                <form:input class="form-control" type="text"
-                                                                    placeholder="Enter your last name"
-                                                                    path="lastName" />
-                                                                <label for="inputLastName">Last name</label>
-                                                            </div>
-                                                        </div>
+                                                    <div class="col-md-6 col-12 mx-auto">
+                                                        <form:label class="form-label" path="lastName">Last Name</form:label>
+                                                        <form:input path="lastName" type="text" class="form-control" cssErrorClass="form-control is-invalid" />
+                                                        <form:errors class="invalid-feedback" path="lastName"/>
                                                     </div>
-                                                    <div class="form-floating mb-3">
-                                                        <form:input
-                                                            class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
-                                                            type="email" placeholder="name@example.com" path="email" />
-                                                        <label>Email address</label>
-                                                        ${errorEmail}
+
+                                                    <div class="col-12 mx-auto">
+                                                        <form:label class="form-label" path="email">Email</form:label>
+                                                        <form:input path="email" type="text" class="form-control" cssErrorClass="form-control is-invalid" />
+                                                        <form:errors class="invalid-feedback" path="email"/>
                                                     </div>
-                                                    <div class="row mb-3">
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input
-                                                                    class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
-                                                                    type="password" placeholder="Create a password"
-                                                                    path="password" />
-                                                                <label>Password</label>
-                                                                ${errorPassword}
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input class="form-control" type="password"
-                                                                    placeholder="Confirm password"
-                                                                    path="confirmPassword" />
-                                                                <label>Confirm Password</label>
-                                                            </div>
-                                                        </div>
+
+                                                    <div class="col-md-6 col-12 mx-auto">
+                                                        <form:label class="form-label" path="password">Password</form:label>
+                                                        <form:input path="password" type="password" class="form-control" cssErrorClass="form-control is-invalid" />
+                                                        <form:errors class="invalid-feedback" path="password"/>
                                                     </div>
-                                                    <div class="mt-4 mb-0">
-                                                        <div class="d-grid">
-                                                            <button class="btn btn-primary btn-block">
+
+                                                    <div class="col-md-6 col-12 mx-auto">
+                                                        <form:label class="form-label" path="confirmPassword">Confirm Password</form:label>
+                                                        <form:input path="confirmPassword" type="password" class="form-control" cssErrorClass="form-control is-invalid" />
+                                                        <form:errors class="invalid-feedback" path="confirmPassword"/>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                    <div class="mt-4 mb-2">
+                                                        <div class="d-grid col-6 mx-auto">
+                                                            <button class="btn btn-primary btn-block" type="submit">
                                                                 Create Account
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </form:form>
-                                            </div>
+                                            
                                             <div class="card-footer text-center py-3">
                                                 <div class="small"><a href="/login">Have an account? Go to login</a>
                                                 </div>
                                             </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

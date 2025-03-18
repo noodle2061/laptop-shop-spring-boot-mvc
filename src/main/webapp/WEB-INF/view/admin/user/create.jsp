@@ -2,7 +2,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
             <!DOCTYPE html>
-            <html lang="en">
+            <html lang="vi">
 
             <head>
                 <meta charset="utf-8" />
@@ -47,16 +47,24 @@
                                     class="mt-5 row" enctype="multipart/form-data">
                                     <div class="mb-3 col-md-6 col-12">
                                         <form:label path="email" class="form-label">Email</form:label>
-                                        <form:input type="text" class="form-control" path="email" />
+                                        <form:input type="text" class="form-control" path="email"
+                                            cssErrorClass="form-control is-invalid" />
+                                        <form:errors cssClass="invalid-feedback" path="email" />
                                     </div>
+
                                     <div class="mb-3 col-md-6 col-12">
                                         <label class="form-label" for="password">Password:</label>
-                                        <form:input type="password" class="form-control" path="password" />
+                                        <form:input type="password" class="form-control"
+                                            cssErrorClass="form-control is-invalid" path="password" />
+                                        <form:errors cssClass="invalid-feedback" path="password" />
                                     </div>
                                     <div class="mb-3 col-md-6 col-12">
                                         <form:label path="fullname" class="form-label">Fullname</form:label>
-                                        <form:input type="text" class="form-control" id="fullname" path="fullname" />
+                                        <form:input type="text" class="form-control"
+                                            cssErrorClass="form-control is-invalid" id="fullname" path="fullname" />
+                                        <form:errors cssClass="invalid-feedback" path="fullname" />
                                     </div>
+
                                     <div class="mb-3 col-md-6 col-12">
                                         <form:label path="phone" class="form-label">Phone</form:label>
                                         <form:input type="tel" class="form-control" id="phone" path="phone" />
@@ -75,12 +83,14 @@
                                     </div>
 
                                     <div class="mb-3 col-md-6 col-12">
-                                        <label for="avatarFile" class = "form-label">Avatar: </label>
-                                        <input type="file" class="form-control" id="avatarFile" name="avatarFile" accept=".jpg, .png, .jpeg"/>
+                                        <label for="avatarFile" class="form-label">Avatar: </label>
+                                        <input type="file" class="form-control" id="avatarFile" name="avatarFile"
+                                            accept=".jpg, .png, .jpeg" />
                                     </div>
 
                                     <div>
-                                        <img id="avatarPreview" style="display: none; max-width: 250px; max-height: 250px;" class = "mb-3" />
+                                        <img id="avatarPreview"
+                                            style="display: none; max-width: 250px; max-height: 250px;" class="mb-3" />
                                     </div>
 
                                     <div>
