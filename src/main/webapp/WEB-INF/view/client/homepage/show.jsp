@@ -85,13 +85,12 @@
                                                         <div class="rounded position-relative fruite-item">
                                                             <div class="fruite-img">
                                                                 <img src="/images/product/${product.image}"
-                                                                    class="img-fluid w-100 rounded-top" alt="${product.name}"
-                                                                    style="height: 230px;">
+                                                                    class="img-fluid w-100 rounded-top"
+                                                                    alt="${product.name}" style="height: 230px;">
                                                             </div>
                                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                                                 style="top: 10px; left: 10px;">Laptop</div>
-                                                            <div
-                                                                class="p-4 border border-top-0 rounded-bottom">
+                                                            <div class="p-4 border border-top-0 rounded-bottom">
                                                                 <h4 style="font-size: 15px;">
                                                                     <a href="/product/${product.id}">
                                                                         ${product.name}
@@ -106,19 +105,19 @@
                                                                         <fmt:formatNumber type="number"
                                                                             value="${product.price}" /> đ
                                                                     </p>
-                                                                    <!-- <form action="/add-product-to-cart/${product.id}"
+                                                                    <form action="/add-product-to-cart/${product.id}"
                                                                         method="post">
                                                                         <input type="hidden"
                                                                             name="${_csrf.parameterName}"
-                                                                            value="${_csrf.token}" /> -->
+                                                                            value="${_csrf.token}" />
 
-                                                                    <button data-product-id="${product.id}"
-                                                                        class="btnAddToCartHomepage mx-auto btn border border-secondary rounded-pill px-3 text-primary">
-                                                                        <i
-                                                                            class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                        Add to cart
-                                                                    </button>
-                                                                    <!-- </form> -->
+                                                                        <button data-product-id="${product.id}"
+                                                                            class="btnAddToCartHomepage mx-auto btn border border-secondary rounded-pill px-3 text-primary">
+                                                                            <i
+                                                                                class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                                            Add to cart
+                                                                        </button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>

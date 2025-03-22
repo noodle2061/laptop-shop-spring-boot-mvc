@@ -60,9 +60,5 @@ public class HomePageController {
         return "client/auth/deny";
     }
     
-    @GetMapping("/product/{id}")
-    public String getMethodName(@PathVariable("id") long id, Model model) {
-        model.addAttribute("product", productService.getById(id));
-        return "client/product/detail";
-    }
+    
 }

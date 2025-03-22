@@ -6,18 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.javaweb.laptopshop.domain.Cart;
+import com.javaweb.laptopshop.domain.CartDetail;
 import com.javaweb.laptopshop.domain.Product;
+import com.javaweb.laptopshop.domain.User;
+import com.javaweb.laptopshop.repository.CartDetailRepository;
+import com.javaweb.laptopshop.repository.CartRepository;
 import com.javaweb.laptopshop.repository.ProductRepository;
+import com.javaweb.laptopshop.repository.UserRepository;
 import com.javaweb.laptopshop.service.ProductService;
 import com.javaweb.laptopshop.service.UploadFileService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    @Autowired
-    private ProductRepository productRepository;
 
-    @Autowired
-    private UploadFileService uploadFileService;
+    @Autowired private UserRepository userRepository;
+    @Autowired private CartRepository cartRepository;
+    @Autowired private ProductRepository productRepository;
+    @Autowired private CartDetailRepository cartDetailRepository;
+    @Autowired private UploadFileService uploadFileService;
 
     @Override
     public long countProduct() {
@@ -71,5 +78,37 @@ public class ProductServiceImpl implements ProductService {
         oldProduct.setTarget(product.getTarget());
 
         productRepository.save(oldProduct);
+    }
+
+    @Override
+    public void addProductToCart(long productId, String email) {
+        User user = userRepository.getOneByEmail(email);
+        if (user != null) {
+            Product product = productRepository.getById(productId);
+            if (product != null) {
+                Cart cart = cartRepository.findByUser(user);
+                if (cart == null) {
+                    cart = new Cart();
+                    cart.setUser(user);
+                    cart.setSum(0);
+                    cartRepository.save(cart);
+                }
+                
+                CartDetail cartDetail = cartDetailRepository.findByCartAndProduct(cart, product);
+                if (cartDetail == null) {
+                    cart.setSum(cart.getSum() + 1);
+                    cartRepository.save(cart);
+                    cartDetail = new CartDetail();
+                    cartDetail.setCart(cart);
+                    cartDetail.setProduct(product);
+                    cartDetail.setPrice(product.getPrice());
+                    cartDetail.setQuantity(1);
+                } else {
+                    cartDetail.setQuantity(cartDetail.getQuantity() + 1);
+                }
+                
+                cartDetailRepository.save(cartDetail);
+            }
+        }
     }
 }

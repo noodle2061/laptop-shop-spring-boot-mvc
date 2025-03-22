@@ -1,14 +1,17 @@
 package com.javaweb.laptopshop.domain;
 
-
-import com.javaweb.laptopshop.validator.StrongPassword;
+import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -16,44 +19,47 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
-    
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull
-    @Email(message = "Email không đúng định dạng!!", regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
+    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
     @NotNull
-    @Size(min = 6, message = "Mật khẩu phải có ít nhất 6 ký tự.")
-    @StrongPassword(message = "Mật khẩu phải chứa ít nhất 8 ký tự, 1 chữ hoa, 1 chữ thường, 1 số và 1 ký tự đặc biệt.")
+    @Size(min = 2, message = "Password phải có tối thiểu 2 ký tự")
     private String password;
 
     @NotNull
-    @Size(min = 3, message = "Cần có ít nhất 3 ký tự.")
+    @Size(min = 3, message = "Fullname phải có tối thiểu 3 ký tự")
     private String fullname;
-    private String phone;
+
     private String address;
+    private String phone;
+
     private String avatar;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Role role; 
-    
-    public User() {
-    }
+    // roleId
+    // User many -> to one -> role
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
-    public User(long id, String email, String password, String fullname, String phone, String address, String avatar) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.fullname = fullname;
-        this.phone = phone;
-        this.address = address;
-        this.avatar = avatar;
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
+
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullname=" + fullname
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
     }
 
     public long getId() {
@@ -88,20 +94,20 @@ public class User {
         this.fullname = fullname;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAvatar() {
@@ -112,14 +118,6 @@ public class User {
         this.avatar = avatar;
     }
 
-    
-
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullname=" + fullname
-                + ", phone=" + phone + ", address=" + address + ", role="+ ((role==null) ? "null" :role.getName())+ ", avatar="+avatar+ "]";
-    }
-
     public Role getRole() {
         return role;
     }
@@ -127,4 +125,21 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
 }

@@ -73,19 +73,19 @@ public class UserController {
         userUpdate.setPhone(user.getPhone());
         userUpdate.setAddress(user.getAddress());
         userService.handleSaveUser(userUpdate);
-        return "redirect:/admin/user";
+        return "redirect:admin/user";
     }
 
     @GetMapping("/admin/user/delete/{id}")
     public String deleteUserPage(Model model, @PathVariable("id") Long id) {
         model.addAttribute("id", id);
-        return "/admin/user/delete";
+        return "admin/user/delete";
     }
 
     @PostMapping("/admin/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
-        return "redirect:/admin/user";
+        return "redirect:admin/user";
     }
 
 }

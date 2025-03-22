@@ -13,4 +13,5 @@ public interface ProductService {
     public Product getById(long id);
     public void delete(long id);
     public void update(Product product, MultipartFile imageFile);
+    public void addProductToCart(long productId, String email);
 }

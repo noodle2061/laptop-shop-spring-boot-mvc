@@ -41,6 +41,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             User user = userService.getUserByEmail(email);
             session.setAttribute("fullName", user.getFullname());
             session.setAttribute("avatar", user.getAvatar());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("id", user.getId());
         }
         
         // Redirect đến URL phù hợp

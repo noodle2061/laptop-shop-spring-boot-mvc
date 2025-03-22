@@ -3,9 +3,12 @@ package com.javaweb.laptopshop.domain;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -16,7 +19,6 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long userId;
     private double totalPrice;
 
     @OneToMany(mappedBy = "order")
@@ -25,11 +27,14 @@ public class Order {
     public Order() {
     }
 
-    public Order(long id, long userId, double totalPrice) {
+    public Order(long id, double totalPrice) {
         this.id = id;
-        this.userId = userId;
         this.totalPrice = totalPrice;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public long getId() {
         return id;
@@ -37,14 +42,6 @@ public class Order {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     public double getTotalPrice() {

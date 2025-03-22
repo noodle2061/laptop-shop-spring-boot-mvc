@@ -2,7 +2,7 @@ package com.javaweb.laptopshop.domain.dto;
 
 import com.javaweb.laptopshop.validator.RegisterChecked;
 
-@RegisterChecked
+// @RegisterChecked
 public class RegisterDTO {
 
     private String firstName;

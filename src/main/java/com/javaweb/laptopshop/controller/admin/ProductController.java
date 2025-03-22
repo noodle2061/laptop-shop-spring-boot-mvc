@@ -35,39 +35,39 @@ public class ProductController {
     public String postMethodName(@ModelAttribute("newProduct") Product newProduct,
             @RequestParam("productImage") MultipartFile imageFile) {
         productService.save(newProduct, imageFile);
-        return "redirect:/admin/product";
+        return "redirect:admin/product";
     }
 
     @GetMapping("/admin/product/detail")
     public String productDetailPage(Model model, @RequestParam("id") int id) {
         Product product = productService.getById(id);
         model.addAttribute("product", product);
-        return "/admin/product/product-detail";
+        return "admin/product/product-detail";
     }
 
     @GetMapping("/admin/product/delete")
     public String deleteProductPage(@RequestParam("id") long id, Model model) {
         model.addAttribute("id", id);
-        return "/admin/product/delete-product";
+        return "admin/product/delete-product";
     }
 
     @PostMapping("/admin/product/delete")
     public String deleteProduct(@RequestParam("id") long id) {
         productService.delete(id);
-        return "redirect:/admin/product";
+        return "redirect:admin/product";
     }
 
     @GetMapping("/admin/product/update")
     public String updateProductPage(@RequestParam("id") long id, Model model) {
         Product product = productService.getById(id);
         model.addAttribute("product", product);
-        return "/admin/product/update-product";
+        return "admin/product/update-product";
     }
 
     @PostMapping("/admin/product/update")
     public String updateProduct(@ModelAttribute("product") Product product,
             @RequestParam(value = "productImage", required = false) MultipartFile imageFile) {
         productService.update(product, imageFile);
-        return "redirect:/admin/product";
+        return "redirect:admin/product";
     }
 }
